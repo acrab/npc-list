@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NPCDirectory</string>
+    <string name="action_settings">Settings</string>
+    <string name="hint_name">Name…</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">NPC not saved because it is empty.</string>
+    <string name="hint_description">Description...</string>
+</resources>
