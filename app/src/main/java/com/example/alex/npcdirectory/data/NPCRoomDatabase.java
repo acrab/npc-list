@@ -9,10 +9,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {NPC.class}, version = 2)
+@Database(entities = {NPC.class, Campaign.class}, version = 3)
 public abstract class NPCRoomDatabase extends RoomDatabase {
 
     public abstract NPCDao npcDao();
+
+    public abstract CampaignDao campaignDao();
 
     private static NPCRoomDatabase INSTANCE;
 
@@ -23,7 +25,7 @@ public abstract class NPCRoomDatabase extends RoomDatabase {
                     // Create database here
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             NPCRoomDatabase.class, "npc_database")
-                            .addMigrations(MIGRATION_1_2)
+                            .addMigrations(MIGRATION_1_3, MIGRATION_2_3)
                             .build();
                 }
             }
@@ -31,11 +33,25 @@ public abstract class NPCRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    public static final Migration MIGRATION_1_2 = new Migration(1,2) {
+    public static final Migration MIGRATION_1_3 = new Migration(1,3) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE NPCs " +
                     "ADD COLUMN description TEXT NOT NULL DEFAULT ''");
+            database.execSQL("CREATE TABLE Campaigns (" +
+                    "'id' INTEGER NOT NULL," +
+                    "'name' TEXT NOT NULL DEFAULT ''," +
+                    "PRIMARY KEY('id'))");
+        }
+    };
+
+    public static final Migration MIGRATION_2_3 = new Migration(2,3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE Campaigns (" +
+                    "'id' INTEGER NOT NULL," +
+                    "'name' TEXT NOT NULL DEFAULT ''," +
+                    "PRIMARY KEY('id'))");
         }
     };
 }
