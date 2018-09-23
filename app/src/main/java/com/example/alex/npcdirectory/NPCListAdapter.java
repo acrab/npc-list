@@ -1,6 +1,5 @@
 package com.example.alex.npcdirectory;
 
-import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -49,7 +48,7 @@ public class NPCListAdapter extends RecyclerView.Adapter<NPCListAdapter.NPCViewH
             });
         } else {
             // Covers the case of data not being ready yet.
-            holder.npcItemView.setText("No NPC");
+            holder.npcItemView.setText(R.string.NoNPCText);
         }
     }
 

@@ -6,7 +6,6 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 @Database(entities = {NPC.class, Campaign.class}, version = 3)
@@ -38,6 +37,7 @@ public abstract class NPCRoomDatabase extends RoomDatabase {
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE NPCs " +
                     "ADD COLUMN description TEXT NOT NULL DEFAULT ''");
+
             database.execSQL("CREATE TABLE Campaigns (" +
                     "'id' INTEGER NOT NULL," +
                     "'name' TEXT NOT NULL DEFAULT ''," +
